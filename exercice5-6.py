@@ -54,5 +54,14 @@ def test_sous_sequence(a,b):
 assert test_sous_sequence('ABCD',"EFGHABCDIJK") == True
 assert test_sous_sequence("","ATCG") == True
 
-
-
+#question 5
+def recherche_sous_sequence(a,b):
+    if len(a) <= len(b):
+        i = 0
+        while i+len(a) < len(b):
+            if a == b[i:i+len(a)]:
+                return i
+            i = i +1
+        return "No occurence found"
+      
+print(recherche_sous_sequence('CATA','TAACGGCATACATAACGCGA'))
