@@ -64,4 +64,4 @@ def recherche_sous_sequence(a,b):
             i = i +1
         return "No occurence found"
       
-print(recherche_sous_sequence('CATA','TAACGGCATACATAACGCGA'))
+print(recherche_sous_sequence('YYY','TAACGGCATACATAACGCGA'))
