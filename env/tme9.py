@@ -120,5 +120,3 @@ def liste_facteurs_premiers(n):
             i = i+1
 
     return result
-
-print(liste_facteurs_premiers(14))
