@@ -19,7 +19,8 @@ def pendu():
         while i < len(mot):
             motCache += "*"
             i += 1
-        
+        del i
+
         listeLettre = []
 
         for lettre in motCache:
@@ -93,6 +94,38 @@ def pendu():
 
 pendu()
 
+class penduManager:
+
+    nbmanager = 0
+    def __init__(self,name,game,score):
+        self.name = name
+        self.game = game
+        self._score = score
+        self.users = {}
+    
+    def addPenduManager(self, target):
+        name, instance = target
+        self.users[name] = instance
+    
+    def _get_score(self):
+        return self._score
+    
+    def _set_score(self,score):
+        self._score = score
+
+    def _del_score(self):
+        del self._score
+    
+    def increment(cls):
+        cls.nbmanager += 1
+
+    def test():
+        print("this is a static method")
+    
+    increment = classmethod(increment)
+    score = property(_get_score,_set_score,_del_score,"""this is the score of the player""")
+    test = staticmethod(test)
+        
     
                 
     
