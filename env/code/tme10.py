@@ -155,3 +155,60 @@ def munion_list(L1,L2):
 #on peut en effet effectuer la fonction munion_dict par comprehension en recuperant les cles et les valeurs dans des listes et en les parcourants par comprehension en les mettants dans des dictionnaires
 
 #exercice 10.5
+
+Grandes_Lignes = {'Paris': {'Strasbourg', 'Dijon', 'Toulouse',
+'Lille', 'Lyon', 'Bordeaux'},
+'Strasbourg':{'Paris', 'Dijon', 'München'},
+'München': {'Strasbourg'},
+'Dijon': {'Paris', 'Strasbourg', 'Lyon', 'Toulouse'},
+'Lyon':{'Paris', 'Dijon', 'Toulouse'},
+'Toulouse': {'Paris', 'Lyon', 'Dijon', 'Bordeaux'},
+'Bordeaux': {'Nantes', 'Paris'},'Nantes': {'Paris', 'Bordeaux','Quimper'},
+'Quimper':{'Nantes'}, 'Ajaccio': {'Bastia'},
+'Bastia': {'Ajaccio'}, 'Lille': {'Paris'}}
+
+#q1
+def trajet_direct(G,st1,st2):
+    for dep,dest in G.items():
+        if dep == st1:
+            if st2 in dest:
+                return True
+    return False
+
+#q2
+def ajout_station(station,correspondance,carte):
+    carte[station] = correspondance
+    return carte
+
+#q3
+def stations_atteignables(carte, depart, k):
+    att = {depart}
+    i = 0
+    while i<k:
+        att = {a for x,y in carte.items() for b in att for a in y if carte[b] == y}
+        i+=1
+    return att
+
+#q4
+def compteur_changement(carte, depart, arrivee):
+    i = 0
+    while not (arrivee in stations_atteignables(carte,depart,i)):
+        i += 1
+        if i>100:
+            return 0
+    return i
+
+#q5
+def generator(carte,depart,arrivee):
+    attr = {depart}
+    for element in attr:
+        attr = {a for x, y in carte.items() for a in y if element in y}
+        yield attr
+
+def existence_trajet(carte, depart, arrivee):
+    attr = set()
+    for element in generator(carte,depart,arrivee):
+        if arrivee in element:
+            return True
+        attr = element
+    return False
